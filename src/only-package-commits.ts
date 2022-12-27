@@ -1,12 +1,13 @@
-import { andThen, identity, memoizeWith, pipeWith, unapply } from "ramda";
-import { pkgUpSync } from "pkg-up";
-import { readPackage } from "read-pkg";
-import path from "path";
-import pLimit from "p-limit";
 import { getCommitFiles, getRoot } from "./git-utils";
 import { mapCommits } from "./options-transforms";
+import Debug from "debug";
+import pLimit from "p-limit";
+import path from "path";
+import { pkgUpSync } from "pkg-up";
+import { andThen, identity, memoizeWith, pipeWith, unapply } from "ramda";
+import { readPackage } from "read-pkg";
 
-const debug = (...args) => console.debug(`[semantic-release:multi]`, ...args);
+const debug = Debug("semantic-release:multi");
 
 const memoizedGetCommitFiles = memoizeWith(identity, getCommitFiles);
 
