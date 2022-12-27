@@ -1,58 +1,55 @@
-import { readPackageSync } from "read-pkg";
-import { compose } from "ramda";
-import { withOnlyPackageCommits } from "./only-package-commits";
-import versionToGitTag from "./version-to-git-tag";
-import logPluginVersion from "./log-plugin-version";
-import { wrapStep } from "semantic-release-plugin-decorators";
-import {
-  mapNextReleaseVersion,
-  withOptionsTransforms,
-} from "./options-transforms";
+import { logPluginVersion } from './log-plugin-version';
+import { withOnlyPackageCommits } from './only-package-commits';
+import { mapNextReleaseVersion, withOptionsTransforms } from './options-transforms';
+import { versionToGitTag } from './version-to-git-tag';
+import { compose } from 'ramda';
+import { readPackageSync } from 'read-pkg';
+import { wrapStep } from 'semantic-release-plugin-decorators';
 
-const analyzeCommits = wrapStep(
-  "analyzeCommits",
-  compose(logPluginVersion("analyzeCommits"), withOnlyPackageCommits),
+export const analyzeCommits = wrapStep(
+  'analyzeCommits',
+  compose(logPluginVersion('analyzeCommits'), withOnlyPackageCommits),
   {
-    wrapperName: "semantic-release-multi",
+    wrapperName: 'semantic-release-multi',
   }
 );
 
-const generateNotes = wrapStep(
-  "generateNotes",
+export const generateNotes = wrapStep(
+  'generateNotes',
   compose(
-    logPluginVersion("generateNotes"),
+    logPluginVersion('generateNotes'),
     withOnlyPackageCommits,
     withOptionsTransforms([mapNextReleaseVersion(versionToGitTag)])
   ),
   {
-    wrapperName: "semantic-release-multi",
+    wrapperName: 'semantic-release-multi',
   }
 );
 
-const success = wrapStep(
-  "success",
+export const success = wrapStep(
+  'success',
   compose(
-    logPluginVersion("success"),
+    logPluginVersion('success'),
     withOnlyPackageCommits,
     withOptionsTransforms([mapNextReleaseVersion(versionToGitTag)])
   ),
   {
-    wrapperName: "semantic-release-multi",
+    wrapperName: 'semantic-release-multi',
   }
 );
 
-const fail = wrapStep(
-  "fail",
+export const fail = wrapStep(
+  'fail',
   compose(
-    logPluginVersion("fail"),
+    logPluginVersion('fail'),
     withOnlyPackageCommits,
     withOptionsTransforms([mapNextReleaseVersion(versionToGitTag)])
   ),
   {
-    wrapperName: "semantic-release-multi",
+    wrapperName: 'semantic-release-multi',
   }
 );
 
-export const tagFormat = readPackageSync().name + "-v${version}";
+export const tagFormat = readPackageSync().name + '-v${version}';
 
-export { analyzeCommits, generateNotes, success, fail };
+export default { analyzeCommits, generateNotes, success, fail, tagFormat };

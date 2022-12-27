@@ -1,25 +1,25 @@
-import { getCommitFiles, getRoot } from "./git-utils";
-import { mapCommits } from "./options-transforms";
-import Debug from "debug";
-import pLimit from "p-limit";
-import path from "path";
-import { pkgUpSync } from "pkg-up";
-import { andThen, identity, memoizeWith, pipeWith, unapply } from "ramda";
-import { readPackage } from "read-pkg";
+import { getCommitFiles, getRoot } from './git-utils';
+import { mapCommits } from './options-transforms';
+import Debug from 'debug';
+import pLimit from 'p-limit';
+import path from 'path';
+import { pkgUpSync } from 'pkg-up';
+import { identity, memoizeWith, pipeWith } from 'ramda';
+import { readPackageSync } from 'read-pkg';
 
-const debug = Debug("semantic-release:multi");
+const debug = Debug('semantic-release:multi');
 
 const memoizedGetCommitFiles = memoizeWith(identity, getCommitFiles);
 
 /**
  * Get the normalized PACKAGE root path, relative to the git PROJECT root.
  */
-const getPackagePath = () => {
+function getPackagePath() {
   const packagePath = pkgUpSync();
   const gitRoot = getRoot();
 
-  return path.relative(gitRoot, path.resolve(packagePath, ".."));
-};
+  return path.relative(gitRoot, path.resolve(packagePath, '..'));
+}
 
 const withFiles = async (commits) => {
   const limit = pLimit(Number(process.env.SRM_MAX_THREADS) || 500);
@@ -46,53 +46,29 @@ const onlyPackageCommits = async (commits) => {
     const packageFile = files.find((file) => {
       const fileSegments = path.normalize(file).split(path.sep);
       // Check the file is a *direct* descendent of the package folder (or the folder itself)
-      return packageSegments.every(
-        (packageSegment, i) => packageSegment === fileSegments[i]
-      );
+      return packageSegments.every((packageSegment, i) => packageSegment === fileSegments[i]);
     });
 
     if (packageFile) {
-      debug(
-        'Including commit "%s" because it modified package file "%s".',
-        subject,
-        packageFile
-      );
+      debug('Including commit "%s" because it modified package file "%s".', subject, packageFile);
     }
 
     return !!packageFile;
   });
 };
 
-// Async version of Ramda's `tap`
-const tapA = (fn) => async (x) => {
-  await fn(x);
-  return x;
-};
-
-const pipePromises = unapply(pipeWith(andThen));
-
 const logFilteredCommitCount =
   (logger) =>
-  async ({ commits }) => {
-    const { name } = await readPackage();
+  ({ commits }) => {
+    const { name } = readPackageSync();
 
-    logger.log(
-      "Found %s commits for package %s since last release",
-      commits?.length || 0,
-      name
-    );
+    logger.log('Found %s commits for package %s since last release', commits?.length || 0, name);
   };
 
 const withOnlyPackageCommits = (plugin) => async (pluginConfig, config) => {
   const { logger } = config;
 
-  return plugin(
-    pluginConfig,
-    await pipePromises(
-      mapCommits(onlyPackageCommits),
-      tapA(logFilteredCommitCount(logger))
-    )(config)
-  );
+  return plugin(pluginConfig, await pipeWith(mapCommits(onlyPackageCommits), [logFilteredCommitCount(logger)])(config));
 };
 
 export { withOnlyPackageCommits, onlyPackageCommits, withFiles };

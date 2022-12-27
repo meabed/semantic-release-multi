@@ -1,4 +1,4 @@
-import { readPackageSync } from "read-pkg";
+import { readPackageSync } from 'read-pkg';
 
 export async function versionToGitTag(version) {
   if (!version) {
@@ -8,5 +8,3 @@ export async function versionToGitTag(version) {
   const { name } = readPackageSync();
   return `${name}-v${version}`;
 }
-
-export default versionToGitTag;

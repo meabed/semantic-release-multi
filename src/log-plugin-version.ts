@@ -1,15 +1,13 @@
-import { readPackage } from "read-pkg";
-import Debug from "debug";
-const debug = Debug("semantic-release:multi");
+import Debug from 'debug';
+import { readPackageSync } from 'read-pkg';
 
-export const logPluginVersion =
-  (type) => (plugin) => async (pluginConfig, config) => {
-    if (config.options.debug) {
-      const { version } = await readPackage();
-      debug.log("Running %o version %o", type, version);
-    }
+const debug = Debug('semantic-release:multi');
 
-    return plugin(pluginConfig, config);
-  };
+export const logPluginVersion = (type) => (plugin) => (pluginConfig, config) => {
+  if (config.options.debug) {
+    const { version } = readPackageSync();
+    debug.log('Running %o version %o', type, version);
+  }
 
-export default logPluginVersion;
+  return plugin(pluginConfig, config);
+};
