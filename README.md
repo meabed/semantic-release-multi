@@ -1,7 +1,15 @@
 # semantic-release-multi
 
-[![Build Status](https://travis-ci.org/pmowrer/semantic-release-multi.svg?branch=master)](https://travis-ci.org/pmowrer/semantic-release-multi) [![npm](https://img.shields.io/npm/v/semantic-release-multi.svg)](https://www.npmjs.com/package/semantic-release-multi) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![NPM version](https://badgen.net/npm/v/semantic-release-multi)](https://npm.im/semantic-release-multi)
+[![Build Status](https://github.com/meabed/semantic-release-multi/workflows/CI/badge.svg)](https://github.com/meabed/semantic-release-multi/actions)
+[![Downloads](https://img.shields.io/npm/dm/semantic-release-multi.svg)](https://www.npmjs.com/package/semantic-release-multi)
+[![UNPKG](https://img.shields.io/badge/UNPKG-OK-179BD7.svg)](https://unpkg.com/browse/semantic-release-multi@latest/)
 
+#### Acknowledgements
+> This module was forked from the amazing [`semantic-release-monorepo`](https://github.com/pmowrer/semantic-release-monorepo). The original module is old and out dated. It was very easy to fork and amend.
+> I needed to update it and support typescript to use it properly in typescript projects.
+
+## What is this?
 Apply [`semantic-release`'s](https://github.com/semantic-release/semantic-release) automatic publishing to a monorepo.
 
 ## Why
