@@ -63,7 +63,7 @@
     "eslint-plugin-prettier": "5.0.0",
     "file-url": "^4.0.0",
     "fs-extra": "^11.1.0",
-    "get-stream": "^7.0.0",
+    "get-stream": "^8.0.0",
     "git-log-parser": "^1.2.0",
     "husky": "^8.0.2",
     "jest": "^29.3.1",
