@@ -70,7 +70,7 @@
     "lint-staged": "^15.0.0",
     "p-each-series": "^3.0.0",
     "prettier": "^2.8.1",
-    "pretty-quick": "3.3.1",
+    "pretty-quick": "4.0.0",
     "semantic-release": "^23.0.0",
     "semantic-release-github-pr": "^6.0.1",
     "tempy": "3.1.0",
