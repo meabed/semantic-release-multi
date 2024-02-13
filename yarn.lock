@@ -5491,10 +5491,15 @@ semantic-release-github-pr@^6.0.1:
     read-pkg "^5.2.0"
     semantic-release-plugin-decorators "^3.0.0"
 
-semantic-release-plugin-decorators@^3.0.0, semantic-release-plugin-decorators@^3.0.1:
+semantic-release-plugin-decorators@^3.0.0:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/semantic-release-plugin-decorators/-/semantic-release-plugin-decorators-3.0.3.tgz#9da0c1f8acdb5a3307e2ffbad53eee52c79e4c6f"
   integrity sha512-YTB2z64yyqEzABJ3yFesV9s5izZ4oKdbYDTu/2whVdlGQYCwsWkw9XYRCnvXzPdWPSWYmCPdJwMJ5w433rncig==
+
+semantic-release-plugin-decorators@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/semantic-release-plugin-decorators/-/semantic-release-plugin-decorators-4.0.0.tgz#f2309ccbeca7dc27c136267752bc13f2c9af9dbe"
+  integrity sha512-5eqaITbgGJu7AWCqY/ZwDh3TCS84Q9i470AImwP9vw3YcFRyR8sEb499Zbnqa076bv02yFUn88GtloQMXQsBrg==
 
 semantic-release@^22.0.0:
   version "22.0.12"

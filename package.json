@@ -47,7 +47,7 @@
     "pkg-up": "^4.0.0",
     "ramda": "^0.29.0",
     "read-pkg": "^8.0.0",
-    "semantic-release-plugin-decorators": "^3.0.1"
+    "semantic-release-plugin-decorators": "^4.0.0"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "4.3.0",
