@@ -44,7 +44,7 @@
     "debug": "^4.3.4",
     "execa": "^9.0.0",
     "p-limit": "^4.0.0",
-    "pkg-up": "^4.0.0",
+    "pkg-up": "^5.0.0",
     "ramda": "^0.30.0",
     "read-pkg": "^9.0.0",
     "semantic-release-plugin-decorators": "^4.0.0"
